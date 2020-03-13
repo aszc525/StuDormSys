@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.StudentDao">
+<select id="Student_Login" parameterType="student" resultType="student">
+       select * from student where stu_id=#{stu_id} and stu_password=#{stu_password}
+</select>
+<select id="QueryStudentSelf" parameterType="student" resultType="student">
+       select * from student where stu_id=#{stu_id}
+</select>
+<update id="ModifyStudentPassword" parameterType="student">
+        UPDATE  student SET stu_password=#{stu_password} where stu_id=#{stu_id}
+</update>
+<select id="StudentSelectGrades" parameterType="grade" resultType="grade">
+        SELECT *
+         from grade <where>
+        <if test="grade_dorm!=null and grade_dorm != '' "> 
+              grade_dorm like CONCAT(CONCAT("%",#{grade_dorm},"%"))
+          </if>
+        <if test="grade_time != null">
+             and grade_time like CONCAT(CONCAT("%",#{grade_time},"%"))
+                </if>
+       </where>
+</select>
+<insert id="AddRepairers" parameterType="Repfs" >
+            INSERT INTO Repfs(repf_id,repf_dorm,
+                               repf_time,repf_stuphone,
+                               repf_thing,repf_option)
+            values(#{repf_id},#{repf_dorm},
+                   #{repf_time},#{repf_stuphone},
+                   #{repf_thing},#{repf_option})
+</insert>
+<select id="SeletRepf" parameterType="Repfs"  resultType="Repfs" >
+             Select * from repfs
+</select>
+</mapper>

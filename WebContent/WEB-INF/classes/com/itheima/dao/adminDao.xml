@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.adminDao">
+	<!--查询个人信息 -->
+	<select id="queryadminSelf" parameterType="admin" resultType="admin">
+	    select * from admin where admin_id= #{admin_id}
+	</select>
+	<!-- 修改个人密码 -->
+	<update id="modifyAdminPassword" parameterType="admin">
+	    update  admin set admin_password=#{admin_password} where admin_id=#{admin_id}
+	</update>
+	<!--登陆验证用户信息 -->
+    <select id="validateUser" parameterType="admin" resultType="admin">
+		select * from admin where admin_id = #{admin_id} and admin_password=#{admin_password}
+    </select> 
+    <!-- 查询学生信息 -->
+    <select id="queryStudentAll" parameterType="student" resultType="student" >
+        select * from student 
+    </select>
+    <!-- 查询来访信息 -->
+    <select id="adminSeletVistor" parameterType="vistor" resultType="vistor">
+         select * from vistor
+    </select>
+     <!-- 查询打分信息 -->
+    <select id="adminSeletGrade" parameterType="grade" resultType="grade">
+         select * from grade
+    </select>
+    <!-- 删除打分信息 -->
+    <delete id="adminDeleteGrades" parameterType="grade">
+         delete  from grade where grade_id = #{grade_id}
+    </delete>
+    <!-- 添加打分记录 -->
+    <insert id="addGrades" parameterType="grade">
+         insert into grade(grade_id,grade_dorm,
+                           grade_absent,grade_weiji,
+                           grade_weisheng,grade_time,
+                           grade_grade1)
+         values(#{grade_id},#{grade_dorm},
+         #{grade_absent},#{grade_weiji},
+         #{grade_weisheng},#{grade_time},
+         #{grade_grade1})
+    </insert>
+    <!-- 记录来访信息 -->
+     <insert id="addVistors" parameterType="vistor">
+       insert into vistor(vistor_id,vistor_name,
+                          vistor_time1,vistor_time2,
+                          vistor_stuName,vistor_stuId,
+                          vistor_studorm
+       )value(#{vistor_id},#{vistor_name},
+              #{vistor_time1},#{vistor_time2},
+              #{vistor_stuName},#{vistor_stuId},
+              #{vistor_studorm})
+     </insert>
+</mapper>

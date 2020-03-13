@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.RepairerDao">
+<select id="RepairerLogin" parameterType="Repairer" resultType="Repairer">
+       select * from repairer where repairer_id=#{repairer_id} and repairer_password=#{repairer_password}
+</select>
+<select id="QueryRepairerSelf" parameterType="Repairer" resultType="Repairer">
+       select * from repairer where repairer_id=#{repairer_id}
+</select>
+<update id="ModifyRepairerPassword" parameterType="Repairer">
+        UPDATE  repairer SET repairer_password=#{repairer_password} where repairer_id=#{repairer_id}
+</update>
+<select id="RepfWorks" parameterType="Repfs"  resultType="Repfs" >
+             Select * from repfs
+</select>
+<update id="RepfWorksOp" parameterType="Repfs">
+        UPDATE  repfs SET repf_option=#{repf_option} where repf_id =#{repf_id}
+</update>
+</mapper>
